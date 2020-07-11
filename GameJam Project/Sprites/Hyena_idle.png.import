@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Itch release raw tileset 01.png-ff97ff91e3b3cbfeed5c92a990f6e8d6.stex"
+path="res://.import/Hyena_idle.png-1586f172edbe9a82e77ff4f798b6cef1.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Itch release raw tileset 01.png"
-dest_files=[ "res://.import/Itch release raw tileset 01.png-ff97ff91e3b3cbfeed5c92a990f6e8d6.stex" ]
+source_file="res://Sprites/Hyena_idle.png"
+dest_files=[ "res://.import/Hyena_idle.png-1586f172edbe9a82e77ff4f798b6cef1.stex" ]
 
 [params]
 
