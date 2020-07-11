@@ -50,7 +50,7 @@ onready var transformTimer = get_node("TransformTimer")
 onready var attackTimer = get_node("AttackTimer")
 onready var attackAnimTimer = get_node("AttackAnimTimer")
 onready var knockBackTimer = get_node("KnockBackTimer")
-onready var damageTimer = get_node("DamageTimer")
+onready var iFrameTimer = get_node("IFrameTimer")
 
 func _ready():
 	var i = rng.randi_range(0,2)
@@ -92,10 +92,11 @@ func attack():
 		attackAnimTimer.start(currentAnimal.attackSpeed / 5)
 		
 func take_damage(dmg,dir):
-	health -= dmg
-	knockBackTimer.start(.15)
-	knockback_direction = dir
-	damageTimer.start(iframeTime)
+	if !iFrameTimer.is_stopped():
+		health -= dmg
+		knockBackTimer.start(.15)
+		knockback_direction = dir
+		iFrameTimer.start(iframeTime)
 
 func _on_TransformTimer_timeout():
 	var i = rng.randi_range(0,animals.size()-1)
@@ -113,4 +114,3 @@ func clone_dictionary(dict):
 	for key in dict:
 		newDict[key] = dict[key]
 	return newDict
-

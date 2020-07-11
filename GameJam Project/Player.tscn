@@ -30,7 +30,7 @@ one_shot = true
 [node name="KnockBackTimer" type="Timer" parent="."]
 one_shot = true
 
-[node name="DamageTimer" type="Timer" parent="."]
+[node name="IFrameTimer" type="Timer" parent="."]
 one_shot = true
 [connection signal="timeout" from="TransformTimer" to="." method="_on_TransformTimer_timeout"]
 [connection signal="timeout" from="KnockBackTimer" to="." method="_on_KnockBackTimer_timeout"]
