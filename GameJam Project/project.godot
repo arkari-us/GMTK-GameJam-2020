@@ -16,11 +16,12 @@ _global_script_class_icons={
 [application]
 
 config/name="GameJam Project"
+run/main_scene="res://MainScene.tscn"
 config/icon="res://icon.png"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "TileSetCutter" )
+enabled=PoolStringArray( "TileSetCutter", "codeandweb.texturepacker" )
 
 [rendering]
 
