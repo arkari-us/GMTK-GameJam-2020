@@ -45,5 +45,4 @@ animations = [ {
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 7 )
 animation = "Transform"
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+frame = 5
