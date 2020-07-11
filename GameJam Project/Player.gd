@@ -95,6 +95,7 @@ func take_damage(dmg,dir):
 	health -= dmg
 	knockBackTimer.start(.15)
 	knockback_direction = dir
+	damageTimer.start(iframeTime)
 
 func _on_TransformTimer_timeout():
 	var i = rng.randi_range(0,animals.size()-1)
