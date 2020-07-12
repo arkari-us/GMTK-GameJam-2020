@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://BearAnim.tres" type="SpriteFrames" id=1]
+[ext_resource path="res://EnemyBear.gd" type="Script" id=2]
+
+[node name="EnemyBear" type="KinematicBody2D"]
+script = ExtResource( 2 )
+
+[node name="BearSprite" type="AnimatedSprite" parent="."]
+modulate = Color( 0.588235, 0.129412, 0.129412, 1 )
+frames = ExtResource( 1 )
+animation = "BearIdle"
+
+[node name="AttackTimer" type="Timer" parent="."]
+
+[node name="KnockBackTimer" type="Timer" parent="."]
+
+[node name="AttackAnimTimer" type="Timer" parent="."]

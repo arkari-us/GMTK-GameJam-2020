@@ -13,19 +13,19 @@ animation = "HyenaIdle"
 [node name="AttackTimer" type="Timer" parent="."]
 one_shot = true
 
-[node name="AttackAnimTimer" type="Timer" parent="."]
-one_shot = true
-
 [node name="TransformTimer" type="Timer" parent="."]
 one_shot = true
 
-[node name="TransformAnimTimer" type="Timer" parent="."]
+[node name="AttackAnimTimer" type="Timer" parent="."]
 one_shot = true
 
 [node name="KnockBackTimer" type="Timer" parent="."]
 one_shot = true
 
 [node name="IFrameTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="TransformAnimTimer" type="Timer" parent="."]
 one_shot = true
 [connection signal="timeout" from="TransformTimer" to="." method="_on_TransformTimer_timeout"]
 [connection signal="timeout" from="KnockBackTimer" to="." method="_on_KnockBackTimer_timeout"]

@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://HyenaAnim.tres" type="SpriteFrames" id=1]
+[ext_resource path="res://EnemyHyena.gd" type="Script" id=2]
+
+[node name="EnemyHyena" type="KinematicBody2D"]
+script = ExtResource( 2 )
+
+[node name="HyenaSprite" type="AnimatedSprite" parent="."]
+modulate = Color( 0.588235, 0.129412, 0.129412, 1 )
+frames = ExtResource( 1 )
+animation = "HyenaAttack"
+
+[node name="AttackTimer" type="Timer" parent="."]
+
+[node name="KnockBackTimer" type="Timer" parent="."]
+
+[node name="AttackAnimTimer" type="Timer" parent="."]
+[connection signal="timeout" from="AttackTimer" to="." method="_on_AttackTimer_timeout"]
