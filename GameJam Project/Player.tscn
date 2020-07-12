@@ -7,7 +7,8 @@
 script = ExtResource( 4 )
 
 [node name="PlayerSprite" type="AnimatedSprite" parent="."]
-position = Vector2( -3.57628e-07, 7.15256e-07 )
-scale = Vector2( 0.581818, 0.432432 )
+position = Vector2( -1.66893e-06, 6.67572e-06 )
+scale = Vector2( 2, 3 )
 frames = ExtResource( 1 )
-animation = "RabbitAttack"
+animation = "Transform"
+frame = 5
