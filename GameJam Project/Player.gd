@@ -125,6 +125,8 @@ func take_damage(dmg,dir):
 	if !iFrameTimer.is_stopped():
 		curHealth -= dmg
 		ui.update_health(curHealth, maxHealth)
+		if curHealth <= 0:
+			die()
 		knockBackTimer.start(.15)
 		knockback_direction = dir
 		iFrameTimer.start(iframeTime)
@@ -202,6 +204,8 @@ func takeDamage(dmg, dir):
 	if iFrameTimer.is_stopped():
 		knockback_direction = dir
 		curHealth -= (dmg / currentAnimal.armor)
+		if curHealth <= 0:
+			die()
 		knockBackTimer.start(knockbackTime)
 		iFrameTimer.start(iframeTime)
 		attackTimer.stop()
@@ -209,6 +213,8 @@ func takeDamage(dmg, dir):
 		attack_cleanup()
 		ui.update_health(curHealth,maxHealth)
 
+func die():
+	get_tree().reload_current_scene()
 func attack_cleanup():
 	for e in rayCastExceptions:
 		rayCast.remove_exception(e)
