@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://BearAnim.tres" type="SpriteFrames" id=1]
+[ext_resource path="res://HyenaAnim.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://Player.gd" type="Script" id=2]
 
 [node name="Player" type="KinematicBody2D"]
@@ -8,7 +8,7 @@ script = ExtResource( 2 )
 
 [node name="PlayerSprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 1 )
-animation = "BearIdle"
+animation = "HyenaIdle"
 
 [node name="AttackTimer" type="Timer" parent="."]
 one_shot = true
