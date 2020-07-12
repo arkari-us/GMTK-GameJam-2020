@@ -46,52 +46,52 @@ region = Rect2( 0, 148, 55, 74 )
 [sub_resource type="AtlasTexture" id=9]
 flags = 4
 atlas = ExtResource( 2 )
-region = Rect2( 0, 148, 55, 74 )
+region = Rect2( 0, 0, 55, 74 )
 
 [sub_resource type="AtlasTexture" id=10]
 flags = 4
 atlas = ExtResource( 2 )
-region = Rect2( 55, 148, 55, 74 )
+region = Rect2( 55, 0, 55, 74 )
 
 [sub_resource type="AtlasTexture" id=11]
 flags = 4
 atlas = ExtResource( 2 )
-region = Rect2( 110, 148, 55, 74 )
+region = Rect2( 110, 0, 55, 74 )
 
 [sub_resource type="AtlasTexture" id=12]
 flags = 4
 atlas = ExtResource( 2 )
-region = Rect2( 165, 148, 55, 74 )
+region = Rect2( 165, 0, 55, 74 )
 
 [sub_resource type="AtlasTexture" id=13]
 flags = 4
 atlas = ExtResource( 2 )
-region = Rect2( 0, 222, 55, 74 )
+region = Rect2( 0, 148, 55, 74 )
 
 [sub_resource type="AtlasTexture" id=14]
 flags = 4
 atlas = ExtResource( 2 )
-region = Rect2( 55, 222, 55, 74 )
+region = Rect2( 55, 148, 55, 74 )
 
 [sub_resource type="AtlasTexture" id=15]
 flags = 4
 atlas = ExtResource( 2 )
-region = Rect2( 0, 0, 55, 74 )
+region = Rect2( 110, 148, 55, 74 )
 
 [sub_resource type="AtlasTexture" id=16]
 flags = 4
 atlas = ExtResource( 2 )
-region = Rect2( 55, 0, 55, 74 )
+region = Rect2( 165, 148, 55, 74 )
 
 [sub_resource type="AtlasTexture" id=17]
 flags = 4
 atlas = ExtResource( 2 )
-region = Rect2( 110, 0, 55, 74 )
+region = Rect2( 0, 222, 55, 74 )
 
 [sub_resource type="AtlasTexture" id=18]
 flags = 4
 atlas = ExtResource( 2 )
-region = Rect2( 165, 0, 55, 74 )
+region = Rect2( 55, 222, 55, 74 )
 
 [resource]
 animations = [ {
@@ -105,13 +105,13 @@ animations = [ {
 "name": "RabbitAttack",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ) ],
-"loop": true,
-"name": "RabbitMove",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ) ],
+"frames": [ SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ) ],
 "loop": true,
 "name": "RabbitIdle",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ) ],
+"loop": true,
+"name": "RabbitMove",
 "speed": 5.0
 } ]
