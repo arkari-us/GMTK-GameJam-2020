@@ -7,6 +7,7 @@ var direction : Vector2 = Vector2()
 var knockback_direction : Vector2 = Vector2()
 var knockbackSpeed = 50
 var iframeTime = 1
+var attack_dir : Vector2 = Vector2()
 onready var anim : AnimatedSprite = get_node("PlayerSprite")
 
 var transformTime_min = 3
@@ -30,7 +31,7 @@ var animals = [
 	{
 		animal = ANIMAL_HYENA,
 		name = "Hyena",
-		attackSpeed = .5,
+		attackSpeed = 1,
 		attackDamage = 10,
 		attackMove = 0,
 		moveSpeed = 50,
@@ -61,6 +62,7 @@ onready var attackTimer = get_node("AttackTimer")
 onready var attackAnimTimer = get_node("AttackAnimTimer")
 onready var knockBackTimer = get_node("KnockBackTimer")
 onready var iFrameTimer = get_node("IFrameTimer")
+onready var tformAnimTimer = get_node("TransformAnimTimer")
 
 func _ready():
 	var i = rng.randi() % (animals.size()-1)
@@ -106,6 +108,7 @@ func attack():
 	if attackTimer.is_stopped():
 		attackTimer.start(currentAnimal.attackSpeed)
 		attackAnimTimer.start(currentAnimal.attackSpeed / 5)
+	attack_dir = (get_global_mouse_position() - position).normalized()
 		
 func take_damage(dmg,dir):
 	if !iFrameTimer.is_stopped():
@@ -121,6 +124,7 @@ func _on_TransformTimer_timeout():
 	animals.push_back(clone_dictionary(currentAnimal))
 	currentAnimal = clone_dictionary(temp)
 	transformTimer.start(rng.randi_range(transformTime_min, transformTime_max))
+	tformAnimTimer.start(.25)
 	tform()
 
 func _on_KnockBackTimer_timeout():
@@ -138,14 +142,14 @@ func clone_dictionary(dict):
 #		tform()
 		
 func manage_animations():
-	if vel.x == 0 and vel.y == 0 and attackAnimTimer.is_stopped():
+	if !tformAnimTimer.is_stopped():
+		play_animation("Transform")
+	elif !attackAnimTimer.is_stopped():
+		play_animation(currentAnimal.name + "Attack")
+	elif vel.x == 0 and vel.y == 0 and attackAnimTimer.is_stopped():
 		play_animation(currentAnimal.name + "Idle")
 	elif vel.x != 0 or vel.y != 0 and attackAnimTimer.is_stopped():
 		play_animation(currentAnimal.name + "Move")
-	elif !attackAnimTimer.is_stopped():
-		play_animation(currentAnimal.name + "Attack")
-	elif !transformTimer.is_stopped():
-		play_animation("Transform")
 
 func play_animation(anim_name):
 	if anim.animation != anim.name:
