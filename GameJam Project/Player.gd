@@ -14,8 +14,8 @@ onready var anim : AnimatedSprite = get_node("PlayerSprite")
 
 var transformTime_min = 3
 var transformTime_max = 7
-
-var health = 100
+var curHealth = 100
+var maxHealth = 100
 
 var animals = [
 	{
@@ -65,8 +65,10 @@ onready var attackAnimTimer = get_node("AttackAnimTimer")
 onready var knockBackTimer = get_node("KnockBackTimer")
 onready var iFrameTimer = get_node("IFrameTimer")
 onready var tformAnimTimer = get_node("TransformAnimTimer")
+onready var ui = get_node("/root/Main/CanvasLayer/UI")
 
 func _ready():
+	ui.update_health(curHealth, maxHealth)
 	var i = rng.randi() % (animals.size()-1)
 	currentAnimal = clone_dictionary(animals[i])
 	animals.remove(i)
@@ -116,7 +118,7 @@ func attack():
 		
 func take_damage(dmg,dir):
 	if !iFrameTimer.is_stopped():
-		health -= dmg
+		curHealth -= dmg
 		knockBackTimer.start(.15)
 		knockback_direction = dir
 		iFrameTimer.start(iframeTime)

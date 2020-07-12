@@ -25,7 +25,6 @@ one_shot = true
 [node name="IFrameTimer" type="Timer" parent="."]
 one_shot = true
 
-
 [node name="TransformAnimTimer" type="Timer" parent="."]
 one_shot = true
 
@@ -33,7 +32,6 @@ one_shot = true
 scale = Vector2( 15, 1 )
 enabled = true
 cast_to = Vector2( 0, 30 )
-[connection signal="timeout" from="AttackAnimTimer" to="." method="_on_AttackAnimTimer_timeout"]
-
 [connection signal="timeout" from="TransformTimer" to="." method="_on_TransformTimer_timeout"]
+[connection signal="timeout" from="AttackAnimTimer" to="." method="_on_AttackAnimTimer_timeout"]
 [connection signal="timeout" from="KnockBackTimer" to="." method="_on_KnockBackTimer_timeout"]

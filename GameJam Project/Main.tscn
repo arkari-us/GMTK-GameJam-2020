@@ -1,10 +1,19 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://TileSet_BG.tres" type="TileSet" id=1]
 [ext_resource path="res://Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://EnemyHyena.tscn" type="PackedScene" id=3]
+[ext_resource path="res://UI.tscn" type="PackedScene" id=4]
 
 [node name="Main" type="Node2D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="UI" parent="CanvasLayer" instance=ExtResource( 4 )]
+margin_left = -6.0
+margin_top = 2.0
+margin_right = -774.0
+margin_bottom = -432.0
 
 [node name="TileMap" type="TileMap" parent="."]
 mode = 2
