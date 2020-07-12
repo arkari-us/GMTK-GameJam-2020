@@ -27,7 +27,7 @@ var animals = [
 		moveSpeed = 30,
 		armor = 2,
 		superArmor = true,
-		scale = Vector2(2,3),
+		scale = Vector2(1.5, 2),
 		frames = preload("res://BearAnim.tres")
 	},
 	{
@@ -39,7 +39,7 @@ var animals = [
 		moveSpeed = 50,
 		armor = 1,
 		superArmor = false,
-		scale = Vector2(1.552, 1.495),
+		scale = Vector2(1, 1),
 		frames = preload("res://HyenaAnim.tres")
 	},
 	{
@@ -51,7 +51,7 @@ var animals = [
 		moveSpeed = 75,
 		armor = 0,
 		superArmor = false,
-		scale = Vector2(0.582, 0.432),
+		scale = Vector2(0.4, 0.2),
 		frames = preload("res://RabbitAnim.tres")
 	}
 ]
