@@ -120,6 +120,8 @@ func take_damage(dmg,dir):
 	if !iFrameTimer.is_stopped():
 		curHealth -= dmg
 		ui.update_health(curHealth, maxHealth)
+		if curHealth <= 0:
+			die()
 		knockBackTimer.start(.15)
 		knockback_direction = dir
 		iFrameTimer.start(iframeTime)
@@ -181,4 +183,6 @@ func dealDamage():
 func takeDamage(dmg):
 	if iFrameTimer.is_stopped():
 		pass
+func die():
+	get_tree().reload_current_scene()
 
