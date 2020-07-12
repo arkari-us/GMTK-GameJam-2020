@@ -181,3 +181,4 @@ func dealDamage():
 func takeDamage(dmg):
 	if iFrameTimer.is_stopped():
 		pass
+

@@ -1,9 +1,22 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://TileSet_BG.tres" type="TileSet" id=1]
 [ext_resource path="res://Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://EnemyHyena.tscn" type="PackedScene" id=3]
 [ext_resource path="res://UI.tscn" type="PackedScene" id=4]
+
+[sub_resource type="SegmentShape2D" id=1]
+a = Vector2( -0.00507355, 0 )
+b = Vector2( -0.00507355, 160 )
+
+[sub_resource type="SegmentShape2D" id=2]
+b = Vector2( 0, 160 )
+
+[sub_resource type="SegmentShape2D" id=3]
+b = Vector2( 240, 0 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 119.435, 5.91891 )
 
 [node name="Main" type="Node2D"]
 
@@ -33,3 +46,19 @@ position = Vector2( 115.161, 74.868 )
 
 [node name="EnemyHyena" parent="." instance=ExtResource( 3 )]
 position = Vector2( 29.4465, 95.3559 )
+
+[node name="LeftBound" type="CollisionShape2D" parent="."]
+position = Vector2( 0.00507355, 0 )
+shape = SubResource( 1 )
+
+[node name="RightBound" type="CollisionShape2D" parent="."]
+position = Vector2( 240, 0 )
+shape = SubResource( 2 )
+
+[node name="BottomBound" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 160 )
+shape = SubResource( 3 )
+
+[node name="NorthWall" type="CollisionShape2D" parent="."]
+position = Vector2( 120, 0 )
+shape = SubResource( 4 )
