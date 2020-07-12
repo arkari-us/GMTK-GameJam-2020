@@ -1,0 +1,36 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://UI.gd" type="Script" id=1]
+[ext_resource path="res://UI/UI_Square.png" type="Texture" id=2]
+
+[node name="UI" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 1.0
+margin_bottom = -3.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HealthBarBG" type="ColorRect" parent="."]
+margin_left = 53.0
+margin_top = 33.0
+margin_right = 329.0
+margin_bottom = 64.0
+color = Color( 0, 0, 0, 1 )
+
+[node name="HealthBar" type="TextureProgress" parent="HealthBarBG"]
+margin_left = 5.05267
+margin_top = 4.05264
+margin_right = 272.053
+margin_bottom = 27.0526
+value = 100.0
+texture_under = ExtResource( 2 )
+texture_progress = ExtResource( 2 )
+tint_under = Color( 0.180392, 0.156863, 0.156863, 1 )
+tint_progress = Color( 0.996078, 0.00784314, 0.00784314, 1 )
+nine_patch_stretch = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
