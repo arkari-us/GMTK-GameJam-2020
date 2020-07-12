@@ -62,16 +62,12 @@ onready var knockBackTimer = get_node("KnockBackTimer")
 onready var iFrameTimer = get_node("IFrameTimer")
 
 func _ready():
-	print (animals[0].frames)
-	var i = rng.randi_range(0,animals.size()-1)
+	var i = rng.randi() % (animals.size()-1)
 	currentAnimal = clone_dictionary(animals[i])
 	animals.remove(i)
 	transformTimer.start(rng.randi_range(transformTime_min, transformTime_max))
-	print (currentAnimal.frames)
 	anim.set_sprite_frames(currentAnimal.frames)
 	anim.set_scale(currentAnimal.scale)
-	print(anim.frames)
-	print(anim.scale)
 
 func _physics_process (_delta):
 	vel = Vector2()
