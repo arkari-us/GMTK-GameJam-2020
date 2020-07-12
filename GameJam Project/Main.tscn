@@ -10,10 +10,10 @@
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="UI" parent="CanvasLayer" instance=ExtResource( 4 )]
-margin_left = -6.0
-margin_top = 2.0
-margin_right = -774.0
-margin_bottom = -432.0
+margin_left = -7.0
+margin_top = -7.0
+margin_right = -776.0
+margin_bottom = -433.0
 
 [node name="TileMap" type="TileMap" parent="."]
 mode = 2
