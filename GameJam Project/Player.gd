@@ -8,8 +8,6 @@ var knockback_direction : Vector2 = Vector2()
 var knockbackSpeed = 50
 var iframeTime = 1
 onready var anim : AnimatedSprite = get_node("PlayerSprite")
-onready var hyenaFrames = preload("res://HyenaAnim.tres")
-onready var rabbitFrames = preload("res://RabbitAnim.tres")
 
 var transformTime_min = 3
 var transformTime_max = 7
@@ -119,16 +117,17 @@ func take_damage(dmg,dir):
 		knockback_direction = dir
 		iFrameTimer.start(iframeTime)
 
-#func _on_TransformTimer_timeout():
-#	var i = rng.randi_range(0,animals.size()-1)
-#	var temp = clone_dictionary(animals[i])
-#	animals.remove(i)
-#	animals.push_back(clone_dictionary(currentAnimal))
-#	currentAnimal = clone_dictionary(temp)
-#	transformTimer.start(rng.randi_range(transformTime_min, transformTime_max))
+func _on_TransformTimer_timeout():
+	var i = rng.randi_range(0,animals.size()-1)
+	var temp = clone_dictionary(animals[i])
+	animals.remove(i)
+	animals.push_back(clone_dictionary(currentAnimal))
+	currentAnimal = clone_dictionary(temp)
+	transformTimer.start(rng.randi_range(transformTime_min, transformTime_max))
+	tform()
 
-#func _on_KnockBackTimer_timeout():
-#	knockback_direction = Vector2()
+func _on_KnockBackTimer_timeout():
+	knockback_direction = Vector2()
 
 func clone_dictionary(dict):
 	var newDict = {}
@@ -136,10 +135,10 @@ func clone_dictionary(dict):
 		newDict[key] = dict[key]
 	return newDict
 	
-func _process(delta):
-	if Input.is_action_just_pressed("transform"):
-		transformTimer.start(.2)
-		tform()
+#func _process(delta):
+#	if Input.is_action_just_pressed("transform"):
+#		transformTimer.start(.2)
+#		tform()
 		
 func manage_animations():
 	if vel.x == 0 and vel.y == 0 and attackAnimTimer.is_stopped():
