@@ -13,6 +13,7 @@ var rayCastExceptions : Array = []
 
 var transformTime_min = 3
 var transformTime_max = 7
+var knockbackTime = .5
 var curHealth = 100
 var maxHealth = 100
 
@@ -26,7 +27,7 @@ var animals = [
 		moveSpeed = 30,
 		armor = 3,
 		scale = Vector2(1.5, 2),
-		rayCastScale = Vector2(20,1),
+		rayCastScale = Vector2(30,15),
 		frames = preload("res://BearAnim.tres"),
 		singleTarget = false
 	},
@@ -39,7 +40,7 @@ var animals = [
 		moveSpeed = 50,
 		armor = 2,
 		scale = Vector2(1, 1),
-		rayCastScale = Vector2(15,1),
+		rayCastScale = Vector2(15,10),
 		frames = preload("res://HyenaAnim.tres"),
 		singleTarget = true
 	},
@@ -87,7 +88,7 @@ func _physics_process (_delta):
 	
 	#inputs
 	if !knockBackTimer.is_stopped():
-		move_and_slide(knockback_direction.normalized() * knockbackSpeed)
+		move_and_slide(((position - knockback_direction)*2).normalized() * knockbackSpeed)
 	elif !attackAnimTimer.is_stopped():
 		vel = (get_global_mouse_position() - position).normalized()
 		if position.distance_to(get_global_mouse_position()) > 5:
@@ -136,6 +137,8 @@ func _on_TransformTimer_timeout():
 	currentAnimal = clone_dictionary(temp)
 	transformTimer.start(rng.randi_range(transformTime_min, transformTime_max))
 	tformAnimTimer.start(.25)
+	attackTimer.stop()
+	attackAnimTimer.stop()
 	tform()
 
 func _on_KnockBackTimer_timeout():
@@ -198,12 +201,13 @@ func dealDamage():
 func takeDamage(dmg, dir):
 	if iFrameTimer.is_stopped():
 		knockback_direction = dir
-		health -= (dmg / currentAnimal.armor)
-		knockBackTimer.start(knockbackSpeed)
+		curHealth -= (dmg / currentAnimal.armor)
+		knockBackTimer.start(knockbackTime)
 		iFrameTimer.start(iframeTime)
 		attackTimer.stop()
 		attackAnimTimer.stop()
 		attack_cleanup()
+		ui.update_health(curHealth,maxHealth)
 
 func attack_cleanup():
 	for e in rayCastExceptions:

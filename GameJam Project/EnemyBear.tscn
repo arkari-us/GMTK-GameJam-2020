@@ -16,3 +16,5 @@ animation = "BearIdle"
 [node name="KnockBackTimer" type="Timer" parent="."]
 
 [node name="AttackAnimTimer" type="Timer" parent="."]
+
+[node name="RayCast2D" type="RayCast2D" parent="."]

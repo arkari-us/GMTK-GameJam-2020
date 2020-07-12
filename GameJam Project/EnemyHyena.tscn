@@ -1,19 +1,31 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://HyenaAnim.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://EnemyHyena.gd" type="Script" id=2]
 
+[sub_resource type="CircleShape2D" id=1]
+radius = 8.28744
+
 [node name="EnemyHyena" type="KinematicBody2D"]
+position = Vector2( -3, -10 )
 script = ExtResource( 2 )
 
 [node name="HyenaSprite" type="AnimatedSprite" parent="."]
 modulate = Color( 0.588235, 0.129412, 0.129412, 1 )
 frames = ExtResource( 1 )
-animation = "HyenaAttack"
+animation = "HyenaIdle"
 
 [node name="AttackTimer" type="Timer" parent="."]
 
 [node name="KnockBackTimer" type="Timer" parent="."]
+one_shot = true
 
 [node name="AttackAnimTimer" type="Timer" parent="."]
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+scale = Vector2( 15, 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 2.99779, 10.1925 )
+shape = SubResource( 1 )
 [connection signal="timeout" from="AttackTimer" to="." method="_on_AttackTimer_timeout"]
