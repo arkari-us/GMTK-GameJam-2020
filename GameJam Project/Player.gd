@@ -124,6 +124,7 @@ func attack():
 func take_damage(dmg,dir):
 	if !iFrameTimer.is_stopped():
 		curHealth -= dmg
+		ui.update_health(curHealth, maxHealth)
 		knockBackTimer.start(.15)
 		knockback_direction = dir
 		iFrameTimer.start(iframeTime)
