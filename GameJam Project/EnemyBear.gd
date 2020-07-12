@@ -27,7 +27,7 @@ func _ready():
 	rayCast.scale = rayCastScale
 	
 func _physics_process(delta):
-	
+	vel = Vector2()
 	var dist = position.distance_to(target.position)
 	
 	if !knockBackTimer.is_stopped():
@@ -38,12 +38,13 @@ func _physics_process(delta):
 		vel = (target.position - position).normalized()
 		
 		move_and_slide(vel * moveSpeed)
+	else:
+		attack()
 	
-	if vel.x != 0:
+	if vel.x != 0 and knockBackTimer.is_stopped():
 		anim.flip_h = vel.x > 0
 		
 	manage_animations()
-	attack()
 
 func manage_animations():
 	if !attackAnimTimer.is_stopped():
@@ -60,9 +61,11 @@ func play_animation(anim_name):
 		anim.play(anim_name)
 
 func attack():
-	if position.distance_to(target.position) <= attackDist and attackTimer.is_stopped():
-		attackTimer.start(attackSpeed)
-		attackAnimTimer.start(attackSpeed / 3)
+	if position.distance_to(target.position) <= attackDist:
+		if attackTimer.is_stopped():
+			attackTimer.start(attackSpeed)
+			attackAnimTimer.start(attackSpeed / 3)
+		dealDamage()
 	else:
 		attackTimer.stop()
 		attackAnimTimer.stop()
