@@ -15,17 +15,18 @@ var transformTime_max = 7
 var health = 100
 
 var animals = [
-#	{
-#		animal = ANIMAL_BEAR,
-#		name = "Bear",
-#		attackSpeed = 1,
-#		attackDamage = 5,
-#		attackMove = 10,
-#		moveSpeed = 30,
-#		armor = 2,
-#		superArmor = true,
-#		scale = Vector2(2,3)
-#	},
+	{
+		animal = ANIMAL_BEAR,
+		name = "Bear",
+		attackSpeed = 1,
+		attackDamage = 5,
+		attackMove = 10,
+		moveSpeed = 30,
+		armor = 2,
+		superArmor = true,
+		scale = Vector2(2,3),
+		frames = preload("res://BearAnim.tres")
+	},
 	{
 		animal = ANIMAL_HYENA,
 		name = "Hyena",
