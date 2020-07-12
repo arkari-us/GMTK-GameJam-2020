@@ -8,6 +8,8 @@ var knockback_direction : Vector2 = Vector2()
 var knockbackSpeed = 50
 var iframeTime = 1
 var attack_dir : Vector2 = Vector2()
+var rayCastExceptions : Array = []
+onready var rayCast = get_node("RayCast2D")
 onready var anim : AnimatedSprite = get_node("PlayerSprite")
 
 var transformTime_min = 3
@@ -82,6 +84,8 @@ func _physics_process (_delta):
 		vel = (get_global_mouse_position() - position).normalized()
 		if position.distance_to(get_global_mouse_position()) > 5:
 			move_and_slide(vel * currentAnimal.attackMove)
+		rayCast.cast_to = vel
+		dealDamage()
 	else:
 		if Input.is_action_pressed("move_up"):
 			vel.y -= 1
@@ -158,3 +162,19 @@ func play_animation(anim_name):
 func tform():
 	anim.set_sprite_frames(currentAnimal.frames)
 	anim.set_scale(currentAnimal.scale)
+
+func _on_AttackAnimTimer_timeout():
+	for e in rayCastExceptions:
+		rayCast.remove_exception(e)
+
+func dealDamage():
+	while rayCast.is_colliding():
+		var e = rayCast.get_collider()
+		rayCastExceptions.append(e)
+		rayCast.add_exception(e)
+		rayCast.force_raycast_update()
+		e.takeDamage(currentAnimal.attackDamage)
+
+func takeDamage(dmg):
+	if iFrameTimer.is_stopped():
+		pass
