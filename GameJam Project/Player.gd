@@ -204,6 +204,8 @@ func takeDamage(dmg, dir):
 	if iFrameTimer.is_stopped():
 		knockback_direction = dir
 		curHealth -= (dmg / currentAnimal.armor)
+		if curHealth <= 0:
+			die()
 		knockBackTimer.start(knockbackTime)
 		iFrameTimer.start(iframeTime)
 		attackTimer.stop()
