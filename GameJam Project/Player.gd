@@ -7,10 +7,9 @@ var direction : Vector2 = Vector2()
 var knockback_direction : Vector2 = Vector2()
 var knockbackSpeed = 50
 var iframeTime = 1
+var singleTargetHit = false
 var attack_dir : Vector2 = Vector2()
 var rayCastExceptions : Array = []
-onready var rayCast = get_node("RayCast2D")
-onready var anim : AnimatedSprite = get_node("PlayerSprite")
 
 var transformTime_min = 3
 var transformTime_max = 7
@@ -28,7 +27,9 @@ var animals = [
 		armor = 2,
 		superArmor = true,
 		scale = Vector2(2,3),
-		frames = preload("res://BearAnim.tres")
+		rayCastScale = Vector2(20,1),
+		frames = preload("res://BearAnim.tres"),
+		singleTarget = false
 	},
 	{
 		animal = ANIMAL_HYENA,
@@ -40,7 +41,9 @@ var animals = [
 		armor = 1,
 		superArmor = false,
 		scale = Vector2(1.552, 1.495),
-		frames = preload("res://HyenaAnim.tres")
+		rayCastScale = Vector2(15,1),
+		frames = preload("res://HyenaAnim.tres"),
+		singleTarget = true
 	},
 	{
 		animal = ANIMAL_RABBIT,
@@ -52,7 +55,9 @@ var animals = [
 		armor = 0,
 		superArmor = false,
 		scale = Vector2(0.582, 0.432),
-		frames = preload("res://RabbitAnim.tres")
+		rayCastScale = Vector2(15,1),
+		frames = preload("res://RabbitAnim.tres"),
+		singleTarget = false
 	}
 ]
 
@@ -66,6 +71,9 @@ onready var knockBackTimer = get_node("KnockBackTimer")
 onready var iFrameTimer = get_node("IFrameTimer")
 onready var tformAnimTimer = get_node("TransformAnimTimer")
 
+onready var rayCast = get_node("RayCast2D")
+onready var anim : AnimatedSprite = get_node("PlayerSprite")
+
 func _ready():
 	var i = rng.randi() % (animals.size()-1)
 	currentAnimal = clone_dictionary(animals[i])
@@ -73,6 +81,7 @@ func _ready():
 	transformTimer.start(rng.randi_range(transformTime_min, transformTime_max))
 	anim.set_sprite_frames(currentAnimal.frames)
 	anim.set_scale(currentAnimal.scale)
+	rayCast.scale = currentAnimal.rayCastScale
 
 func _physics_process (_delta):
 	vel = Vector2()
@@ -112,7 +121,7 @@ func attack():
 	if attackTimer.is_stopped():
 		attackTimer.start(currentAnimal.attackSpeed)
 		attackAnimTimer.start(currentAnimal.attackSpeed / 5)
-	attack_dir = (get_global_mouse_position() - position).normalized()
+		attack_dir = (get_global_mouse_position() - position).normalized()
 		
 func take_damage(dmg,dir):
 	if !iFrameTimer.is_stopped():
@@ -162,19 +171,38 @@ func play_animation(anim_name):
 func tform():
 	anim.set_sprite_frames(currentAnimal.frames)
 	anim.set_scale(currentAnimal.scale)
+	rayCast.scale = currentAnimal.rayCastScale
 
 func _on_AttackAnimTimer_timeout():
-	for e in rayCastExceptions:
-		rayCast.remove_exception(e)
+	attack_cleanup()
 
 func dealDamage():
-	while rayCast.is_colliding():
-		var e = rayCast.get_collider()
-		rayCastExceptions.append(e)
-		rayCast.add_exception(e)
-		rayCast.force_raycast_update()
-		e.takeDamage(currentAnimal.attackDamage)
+	if currentAnimal.singleTarget:
+		if !singleTargetHit and rayCast.is_colliding():
+			var e = rayCast.get_collider()
+			e.takeDamage(currentAnimal.attackDamage,position)
+			singleTargetHit = true
+	else:
+		while rayCast.is_colliding():
+			var e = rayCast.get_collider()
+			rayCastExceptions.append(e)
+			rayCast.add_exception(e)
+			rayCast.force_raycast_update()
+			e.takeDamage(currentAnimal.attackDamage,position)
 
-func takeDamage(dmg):
+func takeDamage(dmg, dir):
 	if iFrameTimer.is_stopped():
-		pass
+		knockback_direction = dir
+		health -= dmg
+		knockBackTimer.start(knockbackSpeed)
+		iFrameTimer.start(iframeTime)
+		attackTimer.stop()
+		attackAnimTimer.stop()
+		attack_cleanup()
+		
+		
+func attack_cleanup():
+	for e in rayCastExceptions:
+		rayCast.remove_exception(e)
+	rayCastExceptions = []
+	singleTargetHit = false
