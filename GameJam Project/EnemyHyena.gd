@@ -51,9 +51,10 @@ func play_animation(anim_name):
 		
 
 func attack():
-	if position.distance_to(target.position) <= attackDist and attackTimer.is_stopped():
-		attackTimer.start(attackSpeed)
-		attackAnimTimer.start(attackSpeed / 3)
+	if position.distance_to(target.position) <= attackDist:
+		if attackTimer.is_stopped():
+			attackTimer.start(attackSpeed)
+			attackAnimTimer.start(attackSpeed / 3)
 	else:
 		attackTimer.stop()
 		attackAnimTimer.stop()
